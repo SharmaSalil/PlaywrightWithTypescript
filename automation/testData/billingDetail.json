@@ -1,0 +1,10 @@
+{
+  "billingFirstName": "demo",
+  "billingLastName": "user",
+  "billingAddressOne": "San Francisco",
+  "billingCity": "San Francisco",
+  "billingPostCode": "94188",
+  "billingEmail": "test@user.com",
+  "billingCountry": "United States (US)",
+  "billingState": "California"
+}

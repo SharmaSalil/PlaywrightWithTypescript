@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "outDir": "dist",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true 
+  },
+  "include": [
+    "**/*.ts",
+    "tests/cucumber/step/ecommerce.js"
+  ]
+}
