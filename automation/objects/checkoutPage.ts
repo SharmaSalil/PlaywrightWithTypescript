@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { BillingAddress } from '../interface/billingAddress';
 
 export class Checkout {
 
@@ -30,15 +31,15 @@ export class Checkout {
         return (await headerTxtElement.textContent())?.trim();
     }
 
-    async fillBillingDetails(billingFirstName: string, billingLastName: string, billingCountry: string, billingAddress: string, billingCity: string, billingState: string, billingPostalCode: string, billingEmail: string) {
-        await this.billingFirstName_Txt_Fill(billingFirstName);
-        await this.billingLastName_Txt_Fill(billingLastName);
-        await this.billingCountrySelect(billingCountry);
-        await this.billingAddressOne_Txt_Fill(billingAddress);
-        await this.billingCity_Txt_Fill(billingCity);
-        await this.billingStateSelect(billingState);
-        await this.billingPostCode_Txt_Fill(billingPostalCode);
-        await this.billingEmail_Txt_Fill(billingEmail);
+    async fillBillingDetails(data: BillingAddress) {
+        await this.billingFirstName_Txt_Fill(data.billingFirstName);
+        await this.billingLastName_Txt_Fill(data.billingLastName);
+        await this.billingCountrySelect(data.billingCountry);
+        await this.billingAddressOne_Txt_Fill(data.billingAddressOne);
+        await this.billingCity_Txt_Fill(data.billingCity);
+        await this.billingStateSelect(data.billingState);
+        await this.billingPostCode_Txt_Fill(data.billingPostCode);
+        await this.billingEmail_Txt_Fill(data.billingEmail);
     }
 
     async billingStateSelect(billingState: string) {

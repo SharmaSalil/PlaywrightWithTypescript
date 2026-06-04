@@ -42,7 +42,7 @@ test('To verify that after filling the required billing address fields user is a
     const data: BillingAddress = billingDetail;
     await apiUtilities.addProductUsingApiAndInjectCookies(productsData.products, addToCartBuilder, apiUtilities, context);
     await page.goto(`${process.env.BASE_URL}${process.env.WEB_ADD_TO_CHECKOUT}`);
-    await checkout.fillBillingDetails(data.billingFirstName, data.billingLastName, data.billingCountry, data.billingAddressOne, data.billingCity, data.billingState, data.billingPostCode, data.billingEmail);
+    await checkout.fillBillingDetails(data);
     await checkout.placeOrder_Btn_Click();
 
     const confirmationText = await orderConfirmationPage.orderConfirmation_Txt_GetText();
