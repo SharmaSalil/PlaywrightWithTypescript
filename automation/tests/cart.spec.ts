@@ -25,10 +25,8 @@ test('To verify the sub price visible in the cart after adding a product in the 
 });
 
 test('To verify the user get landed on the checkout page after clicking on the proceed to checkout', async ({ apiUtilities, page, context, cart, addToCartBuilder, checkout }) => {
-
     await apiUtilities.addProductUsingApiAndInjectCookies(productsData.products, addToCartBuilder, apiUtilities, context);
     await page.goto(`${process.env.BASE_URL}${process.env.WEB_ADD_TO_CART}`);
-
     await cart.proceedToCheckout_Btn_Click();
     const checkoutHeader = await checkout.header_Txt_GetText();
 
