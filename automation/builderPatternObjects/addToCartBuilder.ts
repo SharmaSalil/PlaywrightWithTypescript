@@ -6,22 +6,22 @@ export class AddToCartBuilder {
         quantity: ''
     };
 
-    setProductId(productId: string) {
+    private setProductId(productId: string) {
         this.request.product_id = productId;
         return this;
     }
 
-    setQuantity(quantity: string) {
+    private setQuantity(quantity: string) {
         this.request.quantity = quantity;
         return this;
     }
 
-    setProductSku(quantity: string) {
+    private setProductSku(quantity: string) {
         this.request.product_sku = quantity;
         return this;
     }
 
-    build() {
+    private build() {
         return this.request;
     }
 

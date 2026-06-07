@@ -21,11 +21,9 @@ test('To verify that the subtotal and final price are correctly displayed in the
     const finalAmountCalculated = await checkout.calculateTotalAmountWithTax(taxOnOrderAmountFixed, taxOnOrderAmountPercent, finalCalculatedSubTotalPrice.total);
     await apiUtilities.addProductUsingApiAndInjectCookies(productsData.products, addToCartBuilder, apiUtilities, context);
     await page.goto(`${process.env.BASE_URL}${process.env.WEB_ADD_TO_CHECKOUT}`);
-    const webSubTotal = await checkout.subTotalAmount_Txt_GetText();
-    const webFinalAmount = await checkout.finalTotalAmount_Txt_GetText();
 
-    expect.soft(webSubTotal).toEqual(finalCalculatedSubTotalPrice.total)
-    expect.soft(webFinalAmount).toEqual(finalAmountCalculated)
+    expect.soft(await checkout.subTotalAmount_Txt_GetText()).toEqual(finalCalculatedSubTotalPrice.total)
+    expect.soft(await checkout.finalTotalAmount_Txt_GetText()).toEqual(finalAmountCalculated)
 });
 
 test('To verify that an error message is shown when the user clicks Place Order without filling in the required form fields.', async ({ apiUtilities, page, context, checkout, addToCartBuilder }) => {
@@ -33,19 +31,15 @@ test('To verify that an error message is shown when the user clicks Place Order 
     await page.goto(`${process.env.BASE_URL}${process.env.WEB_ADD_TO_CHECKOUT}`);
     await checkout.placeOrder_Btn_Click();
 
-    const isAllValidationsMatched = await checkout.checkForAllTheMandatoryChecks(validations.checkOutRequiredFields);
-
-    expect(isAllValidationsMatched).toBeTruthy();
+    expect(await checkout.checkForAllTheMandatoryChecks(validations.checkOutRequiredFields)).toBeTruthy();
 });
 
-test('To verify that after filling the required billing address fields user is able to place an order.', async ({ apiUtilities, page, context, checkout, addToCartBuilder, orderConfirmationPage }) => {
+test('To verify that after filling the required billing address fields, user is able to place an order.', async ({ apiUtilities, page, context, checkout, addToCartBuilder, orderConfirmationPage }) => {
     const data: BillingAddress = billingDetail;
     await apiUtilities.addProductUsingApiAndInjectCookies(productsData.products, addToCartBuilder, apiUtilities, context);
     await page.goto(`${process.env.BASE_URL}${process.env.WEB_ADD_TO_CHECKOUT}`);
     await checkout.fillBillingDetails(data);
     await checkout.placeOrder_Btn_Click();
 
-    const confirmationText = await orderConfirmationPage.orderConfirmation_Txt_GetText();
-
-    expect(confirmationText).toEqual('Thank you. Your order has been received.')
+    expect(await orderConfirmationPage.orderConfirmation_Txt_GetText()).toEqual('Thank you. Your order has been received.')
 });
